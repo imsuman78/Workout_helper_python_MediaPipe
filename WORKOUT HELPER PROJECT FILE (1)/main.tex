@@ -1,0 +1,894 @@
+\documentclass[10pt]{report}
+\usepackage{blindtext}
+\usepackage{times}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{sectsty}
+\usepackage{float}
+\usepackage{array}
+\usepackage[backend=biber,bibencoding=latin1]{biblatex}
+\chapterfont{\centering}
+\usepackage{enumitem}
+\usepackage{enumerate}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{ragged2e}
+\usepackage[headheight=0pt,headsep=0pt]{geometry}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\makeatletter
+\def\@makechapterhead#1{%
+  %%%%\vspace*{50\p@}% %%% removed!
+  {\parindent \z@ \centering\normalfont
+    \ifnum \c@secnumdepth >\m@ne
+        \huge\bfseries \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \Huge \bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}
+\def\@makeschapterhead#1{%
+  %%%%%\vspace*{50\p@}% %%% removed!
+  {\parindent \z@ \centering
+    \normalfont
+    \interlinepenalty\@M
+    \Huge \bfseries  #1\par\nobreak
+    \vskip 40\p@
+  }}
+\makeatother
+
+\lstset{%
+ language=Java,% the language of the code
+ basicstyle=\footnotesize,% the size of the fonts that are used for the code
+ numbers=left,% where to put the line-numbers
+ numberstyle=\tiny\color{gray},% the style that is used for the line-numbers
+ stepnumber=1,% each line is numbered
+ numbersep=5pt,% how far the line-numbers are from the code
+ backgroundcolor=\color{white},% choose the background color. You must add \usepackage{color}
+ showspaces=false,% show spaces adding particular underscores
+ showstringspaces=false,% underline spaces within strings
+ showtabs=false,% show tabs within strings adding particular underscores
+ frame=single,% adds a frame around the code
+ rulecolor=\color{black},% if not set, the frame-color may be changed on line-breaks within notblack text (e.g. commens (green here))
+ tabsize=2,% sets default tabsize to 2 spaces
+ captionpos=b,% sets the caption-position to bottom
+ breaklines=true,% sets automatic line breaking
+ breakatwhitespace=false,% sets if automatic breaks should only happen at whitespace
+ title=\lstname,% show the filename of files included with \lstinputlisting;
+ % also try caption instead of title
+ keywordstyle=\color{black},% keyword style
+ commentstyle=\color{dkgreen},% comment style
+ stringstyle=\color{mauve},% string literal style
+ escapeinside={\%*}{*)}, %if you want to add a comment within your code
+ morekeywords={*,...} %if you want to add more keywords to the set
+}
+\geometry{a4paper,total={180mm,250mm},left=20mm,top=20mm, right=20mm}
+
+\thispagestyle{empty}
+\begin{document}
+\newpage
+\begin{center}
+\thispagestyle{empty}
+\LARGE{\textsc {\textbf{\textcolor{black}{WORKOUT HELPER USING COMPUTER VISION AND MEDIAPIPE}}}}\\[0.2cm]
+\vspace{0.2cm}
+\Large{\textit{\textcolor{black}{\\Major project report submitted \\in partial fulfillment of the
+requirement
+for award of the degree of}}}\\[0.3cm]
+\Large{\textbf{\textcolor{black}{\\Bachelor of Technology\\in \\Computer Science \& Engineering}}}
+\vspace{0.5cm}
+\Large{\textbf{\textcolor{black}{\\By}}}\\[0.5cm]
+\begin{table}[h]
+\centering
+\Large{\textcolor{black}{
+\begin{tabular}{>{\bfseries}lc>{\bfseries}r}
+STUDENT NAME 1&(REGISTER NO) & (VTU NO)\\STUDENT NAME 2 & (REGISTER NO)&(VTU NO)\\STUDENT NAME 3&(REGISTER NO) & (VTU NO)\\
+\end{tabular}}}
+\end{table}
+\vspace{0.5cm}
+\large{\textit{\textcolor{black}{Under the guidance of}}}\\
+\large{\textit{\textcolor{black}{SUPERVISOR NAME,Degree.,\\
+ASSISTANT PROFESSOR}
+}}\\
+\vspace{0.5cm}
+\includegraphics[scale=0.7]{Vel tech-Logo.jpg}\\
+\vspace{1cm}
+\large{\textbf{\textcolor{black}{DEPARTMENT OF COMPUTER SCIENCE \& ENGINEERING}}}\\
+
+\large{\textbf{\textcolor{black}{SCHOOL OF COMPUTING}}}\\
+\vspace{0.5cm}
+\Large{\textbf{\textcolor{black}{VEL TECH RANGARAJAN DR. SAGUNTHALA R\&D INSTITUTE OF
+SCIENCE \& TECHNOLOGY\\
+\vspace{0.2cm}
+(Deemed to be University Estd u/s 3 of UGC Act,
+1956)}}}\\\Large{\textbf{\textcolor{black}{Accredited by NAAC with A Grade}}}\\
+\large{\textbf{\textcolor{black}{CHENNAI 600 062, TAMILNADU, INDIA}}}
+\vspace{0.4cm}
+\large{\textbf{\textcolor{black}{\\June,2022}}}\\
+\end{center}
+
+%CERTIFICATE
+\newpage
+\pagenumbering{roman}
+\begin{center}
+{\Huge \textbf{CERTIFICATE}}\\[1cm]
+\end{center}
+\linespread{1.5}
+\large{It is certified that the work contained in the project report titled "PROJECT-TITLE (IN CAPITAL
+LETTER)" by "STUDENT NAME1 & (REGISTER NO), STUDENT NAME2 & (REGISTER NO), STUDENT NAME3 & (REGISTER NO)" has been carried out under my supervision and that this work has not
+been submitted elsewhere for a degree.}
+\vspace{1.5cm}
+\begin{flushright}
+\textbf{Signature of Supervisor\\Supervisor name\\Designation\\Computer Science \&
+Engineering\\School of Computing\\Vel Tech Rangarajan Dr.Sagunthala R\&D\\Institute of Science \&
+Technology\\June,2022}\\[2.0cm]
+\textbf{Signature of Head of the Department\\Dr. V. Srinivasa Rao\\Professor \& Head\\Computer
+Science \& Engineering\\School of Computing\\Vel Tech Rangarajan Dr.Sagunthala R\&D\\Institute of
+Science \& Technology\\June,2022}\\
+\end{flushright}
+%declaration
+\newpage
+\begin{center}
+\Huge \textbf{DECLARATION}
+\end{center}
+\vspace{1.0cm}
+\linespread{1.5}
+\large{
+We declare that this written submission represents my ideas in our own words and where others' ideas
+or words have been included, we have adequately cited and referenced the original sources. We also
+declare that we have adhered to all principles of academic honesty and integrity and have not
+misrepresented or fabricated or falsified any idea/data/fact/source in our submission. We understand
+that any violation of the above will be cause for disciplinary action by the Institute and can also evoke
+penal action from the sources which have thus not been properly cited or from whom proper permission
+has not been taken when needed.}
+\vspace{2.0cm}
+\begin{flushright}
+(Signature)\\
+\large{(STUDENT NAME1(IN CAPITAL LETTER)}\\
+\large{Date:\hspace*{1.0cm}/\hspace*{1.0cm}/}\\[2.0cm]
+(Signature)\\
+\large{(STUDENT NAME2(IN CAPITAL LETTER)}\\
+\large{Date:\hspace*{1.0cm}/\hspace*{1.0cm}/}\\[2.0cm]
+(Signature)\\
+\large{(STUDENT NAME3(IN CAPITAL LETTER)}\\
+\large{Date:\hspace*{1.0cm}/\hspace*{1.0cm}/}\\[2.0cm]
+\end{flushright}
+\newpage
+%approval sheet
+\newpage
+\begin{center}
+\Huge\textbf{APPROVAL SHEET}\\
+\vspace{1.0cm}
+\end{center}
+\linespread{1.5}
+\justifying{
+\large{This project report entitled (PROJECT TITLE (IN CAPITAL LETTERS)) by (STUDENT NAME1
+(REGISTER NO), (STUDENT NAME2 (REGISTER NO), (STUDENT NAME3 (REGISTER NO) is approved for the
+degree of B.Tech in Computer Science \& Engineering.}\\}
+\vspace{4.0cm}
+\begin{flushleft}
+\Large \textbf{Examiners} \hfill \Large \textbf{Supervisor}\\
+\end{flushleft}
+\begin{flushright}
+Supervisor name, Degree.,
+\end{flushright}
+\vspace{1.0cm}
+\begin{flushleft}
+\large{\textbf{Date:\hspace*{1.0cm}/\hspace*{2.0cm}/}}\\
+\large{\textbf{Place:}}
+\end{flushleft}
+%acknowledgment
+\newpage
+\begin{center}
+\LARGE{\textbf{ACKNOWLEDGEMENT}}\\[1cm]
+\end{center}
+\linespread{1.13}
+\large{\paragraph{}We express our deepest gratitude to our respected \textbf{Founder Chancellor and
+President Col. Prof. Dr. R. RANGARAJAN B.E. (EEE), B.E. (MECH), M.S (AUTO),D.Sc., Foundress President
+Dr. R. SAGUNTHALA RANGARAJAN M.B.B.S.} Chairperson Managing Trustee and Vice President.}
+\large{\paragraph{}We are very much grateful to our beloved \textbf{Vice Chancellor Prof. S.
+SALIVAHANAN,} for providing us with an environment to complete our project successfully.}
+\large{\paragraph{}We record indebtedness to our \textbf{Dean \& Head, Department of Computer
+Science \& Engineering Dr.V.SRINIVASA RAO, M.Tech., Ph.D.,} for immense care and encouragement
+towards us throughout the course of this project.}
+\large{\paragraph{}We also take this opportunity to express a deep sense of gratitude to our Internal
+Supervisor \textbf{Supervisor name,degree.,(in capital letters)} for his/her cordial support, valuable
+information and guidance, he/she helped us in completing this project through various stages. }
+\large{\paragraph{}A special thanks to our \textbf{Project Coordinators Mr. V. ASHOK KUMAR, M.Tech., Ms. C. SHYAMALA KUMARI, M.E., Ms.S.FLORENCE, M.Tech., } for their valuable guidance and support throughout the course of the project.}
+
+\large{\paragraph{}We thank our department faculty, supporting staff and friends for their help and
+guidance to complete this project.}
+\vspace{2.0cm}
+\begin{flushright}
+\begin{tabular}{>{\bfseries}lc>{\bfseries}r}
+STUDENT NAME1 & & (REGISTER NO)\\STUDENT NAME2 & & (REGISTER NO)\\STUDENT NAME3 & &
+(REGISTER NO)\\
+\end{tabular}
+\end{flushright}
+%ABSTRACT
+\newpage
+\begin{center}
+\vspace{2cm}
+\Large{\textbf{ABSTRACT}}\\[0.5cm]
+\end{center}
+\begin{center}
+\addtocontents{toc}{~\hfill\textbf{Page.No}\par}
+\addcontentsline{toc}{chapter}{ABSTRACT}
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\end{center}
+\vspace{-5em}
+\Large{\paragraph\\
+The aim of this project, Workout helper is to meet the following objectives:
+• First thing is to provide a great experience to the Users while they use our app while working out\\
+The computer should be able to identify users body in almost every lighting while they use this app.\\\\
+User should not have any problem while navigation the interface of the  application.\\\\
+ Almost no user interface is required and user does no need to interact with the application, once they start the body recognition process.\\
+Users should not have any difficulty accessing the application and accessing his camera.\\\\
+The app should be able to calculate the angles between joints and accordingly they should count the now of workout done by user.\\
+They application should be able to provide us with a workable and efficient frame rate for us to work with. Application should also provide support for external Camera as sometimes the main camera may not work properly.\\
+Application should be platform independent and should run on both Mac and Windows as all the users.\\
+Application should provide good navigation menu for users to navigate to different pages and areas .\\
+
+ }\\
+\vspace{0.5cm}
+\noindent \textbf{}
+\textbf{}
+%list of figure
+\newpage
+\renewcommand*\listfigurename{LIST OF FIGURES}
+\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+\listoffigures
+%\newpage
+%\renewcommand{\listtablename}{LIST OF TABLES}
+%\addcontentsline{toc}{chapter}{LIST OF TABLES}
+%\listoftables
+%list of abbreviation
+%\newpage
+%\newlist{abbrv}{itemize}{1}
+%\setlist[abbrv,1]{label=,labelwidth=1in,align=parleft,itemsep=0.1\baselineskip,leftmargin=!}
+%\chapter*{LIST OF ACRONYMS AND ABBREVIATIONS}
+%\chaptermark{LIST OF ACRONYMS AND ABBREVIATIONS}
+%\addcontentsline{toc}{chapter}{LIST OF ACRONYMS AND ABBREVIATIONS}
+%\begin{abbrv}
+%\item[abbr] Abbreviation
+%\end{abbrv}
+\newpage
+\renewcommand*\contentsname{TABLE OF CONTENTS}
+%\addtocontents{toc}{\textbf{CONTENT} \hfill \textbf{PAGE NO.}}
+\tableofcontents
+\addtocontents{toc}{\protect\pagestyle{empty}}
+\thispagestyle{empty}
+%introduction
+\chapter{INTRODUCTION}
+\pagenumbering{arabic}
+\section{Introduction}
+The Workout Helper is an application that can be used to help a person correct their posture and help them while they work out using computer technologies and different python libraries. \\
+User can use this application to help them while they workout alone without any personal trainer or helper. Application uses very little amount of Computation power and gives accurate results and report about user’s workout.\\
+User can use our application to generate report on his workout. Reports generated will give him some insights on what he should be working on his body.
+
+\linespread{1.5}
+\section{Aim of the project}
+Today, people can’t always find time to go to gym because of many issues like financial 
+problem, or time constraints.\\
+Bad posture is one of the worst mistake that a beginner can make while he starts working out 
+without any helper.\\
+The aim of this project, Workout helper is to meet the following objectives:\\
+• First thing is to provide a great experience to the Users while they use our app while working 
+out\\
+• The computer should be able to identify users body in almost every lighting while they use 
+this app.\\
+• Almost no user interface is required and user does no need to interact with the application.
+\section{Project Domain}
+The Project is based on the concept of helping users correct their physical health and the application will provide them with the report on his/hers workout routine as well as count his total number of reps he has done while doing pull ups.
+\section{Scope of the Project}
+The scope of our project is to ensure that the efficiency of our database system will be same if 
+user is using the app in a very poorly lit place.\\
+It needs to detect at almost everyplace with or without good lighting\\
+It needs to give good frames per second so even if user is doing workout very fast the 
+application will still work.
+%literature review
+\chapter{LITERATURE REVIEW}
+In the early system of workout, people use to workout by themselves without any helper and 
+with very less equipment and people usually make mistakes while they workout alone and these 
+mistakes can be corrected easily.\\\\
+The mistakes can hurt the user in long term and sometimes be harmful to health too. General 
+posture correction and general joint positioning can help to correct one’s workout routine and 
+it can also help you keep a count of exercises like no of push-ups a user has done.\\\\
+Henry O.Velesaca , Patricia L.Suarez , Raul Mira and Angel D.Sappa , present in their paper “Computer vision based food grain classification” 2021 IEEE.\\
+
+A survey on computer vision based on approach for food grain classification  to  find different varieties of grain.\\
+
+To comparisons and common technique used like  pipeline  to differentiate  between the grains and also generate ground truth data.\\\\
+A survey of public datasets for computer vision tasks in precision agriculture\\
+
+\linespread{1.5}
+%PROJECT DESCRIPTION
+\chapter{PROJECT DESCRIPTION}
+\linespread{1.5}
+\section{Existing System}
+The current workout helper systems in the market are too expensive for common 
+man and they uses different approach when it comes to helping in workout and
+they use one on one session to help its users and probably give premium 
+service with the help of other users. Furthermore, they encourage users to take 
+their paid service and they give very less free services.\\
+They don’t give functionality like counting pull ups and counting push ups 
+and doesn’t give a proper image of body via computer vision.\\
+Current system doesn’t have that much automated functionalities and they 
+probably won’t give much feedback that is computer based. In this sense 
+computer vision applications are not there in current system. Only human help 
+system is available.\\
+\subsection{}2.1 Pros and Cons of the Traditional Approach\\\\
+Pros:\\\\
+• Simple\\
+• Easy to market to public\\
+• human based help always available\\
+• More resources are used on UI\\
+• System have good data management\\
+Cons:\\\\
+• Very expensive for beginners\\
+• very less functionalities\\
+• Old technologies are used\\
+• Unmanaged redundancy\\
+• Force people to take their paid services\\
+• Very less use of Computer Vision Application\\
+• High costs in the long run\\
+
+\section{Proposed System}
+This project aims to create a Workout Helper System intended for user with very less human 
+interaction. Our system provides computer based assistance based on computer vision 
+technology and then it helps in keeping counter of all the exercise and give a report to user on 
+how many exercises user did , for example how any push ups a user did.\\\\
+Advantages of proposed System\\\\
+ Easy to learn the system.\\
+• Easy to Order food.\\
+• Easy to calculate bill.\\
+• Platform independent\\
+\section{Feasibility Study}
+A feasibility study combines up-to-date pedagogical research with best practice in implementation of workout helping tools acknowledging that organisational specifics may helps the user in working out properly\\. 
+It consists three parts:\\\\
+\subsection{Economic Feasibility}
+Economic Feasibility of our project is concerned with the cost needed for development. The only cost involved is coding and if the user requires, he/she can use external camera. Hence, our project is economically feasible.
+\subsection{Technical Feasibility}
+This setup needs python programming language to work on your computer which is free to use , the code can work on any platform whether window or mac. Hence our system is technical feasible.
+\subsection{Social Feasibility}
+Our Solution to workout related problems will be helpful to all the users and will overall improve the performance of all the users and increase their physical health, Hence our system is Social Feasible.
+\section{System Specification}
+\subsection{Hardware Specification}
+• Hardware : Pentium\\
+• Speed : 1.1 GHz\\
+• RAM : 4GB\\
+• Hard Disk : 20 GB\\
+• Key Board : Standard Windows Keyboard\\
+• Mouse : Two or Three Button Mouse\\
+• Monitor : SVGA\\
+• Webcam : External\\
+\subsection{Software Specification}
+• Operating System : Windows / Linux / Mac\\
+• Technologies : Python and its libraries
+%\subsection{Standards and Policies}
+\chapter{METHODOLOGY}
+\linespread{1.5}
+\section{General Architecture}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 20cm, width=10cm]{newArchi.PNG}
+ \caption{\textbf{Mediapipe Architecture}}
+\end{figure}
+Description:\\
+The above given figure shows and visualize the structure and general architecture of an Mediapipe representation of body nodes.
+\section{Design Phase}
+\subsection{Data Flow Diagram}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 10cm, width=15cm]{image.PNG}
+ \caption{\textbf{Data Flow Diagram}}
+\end{figure}
+
+Description:\\
+The above given figure shows the flow of the video stream data that went into the camera of our computer and what happens to that video streaming data and how its being treated.
+\subsection{Use Case Diagram}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 13cm, width=12cm]{body_recognition.PNG}
+ \caption{\textbf{Body Nodes Recognition}}
+\end{figure}
+Description
+This shows how the camera recognoise human body and its respective joints in our body.
+%\subsection{Class Diagram}
+%\begin{figure}[H]
+% \centering
+% \includegraphics[height= 10cm, width=12cm]{images/class.jpg}
+% \caption{\textbf{Fig. Name}}
+%\end{figure}
+%Description
+%\subsection{Sequence Diagram}
+%\begin{figure}[H]
+% \centering
+% \includegraphics[height= 12cm, width=12cm]{images/Untitled Diagram (9).jpg}
+% \caption{\textbf{Fig. Name}}
+%\end{figure}
+%Description
+%\subsection{Collaboration diagram}
+%\begin{figure}[H]
+% \centering
+% \includegraphics[height= 12cm, width=12cm]{images/Untitled Diagram (9).jpg}
+% \caption{\textbf{Fig. Name}}
+%\end{figure}
+%Description
+
+\subsection{Activity Diagram}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 21cm, width=10cm]{humanBody.PNG}
+ \caption{\textbf{Pose Estimation}}
+\end{figure}
+%\section{Algorithm \& Pseudo Code}
+%\subsection{Algorithm}
+%\subsection{Pseudo Code}
+
+%Description of Sequence Diagram
+\section{Module Description}
+The following is the module description of our workout helper code.
+\subsection{Body Nodes Recognition}
+We use Computer Vision Technologies to Capture Video Stream from our webcam and perform operations on that video stream.
+Computer vision is a field of artificial intelligence (AI) that enables computers and systems to derive meaningful information from digital images, videos and other visual inputs — and take actions or make recommendations based on that information. If AI enables computers to think, computer vision enables them to see, observe and understand.
+We can use webcam from our laptop as an source for video stream that will be processed by our system. Our System need to adapt and identify our objective in all kinds of lighting and we need our system to identify objects even if they are at a very far distance.
+
+\subsection{Saving Data To Files}
+We can save our counter of the workout in a CSV file with any respective field. for our project we are gonna store the time taken by each pull-ups and and save that time taken in a csv file 
+Together we can plot this time and pull up reps values to generate a Graph in order to show the relationship between them.
+%\subsection{Module3}
+\section{Steps to execute/run/implement the project}
+\subsection{4.Overview of MediaPipe}
+It is a Framework for building machine learning pipelines for processing time-series data like video, audio, etc. This cross-platform Framework works in Desktop/Server, Android, iOS, and embedded devices like Raspberry Pi and Jetson Nano.
+
+Human pose estimation from video plays a critical role in various applications such as 
+quantifying physical exercises, sign language recognition, and full-body gesture control. For 
+example, it can form the basis for yoga, dance, and fitness applications. It can also enable the 
+overlay of digital content and information on top of the physical world in augmented reality.\\
+MediaPipe Pose is a ML solution for high-fidelity body pose tracking, inferring 33 3D 
+landmarks and background segmentation mask on the whole body from RGB video frames 
+utilizing our Blaze Pose research that also powers the ML Kit Pose Detection API. Current 
+state-of-the-art approaches rely primarily on powerful desktop environments for inference, 
+whereas our method achieves real-time performance on most modern mobile phones, 
+desktops/laptops, in python and even on the web.\\
+ML Pipeline\\
+The solution utilizes a two-step detector-tracker ML pipeline, proven to be effective in our 
+MediaPipe Hands and MediaPipe Face Mesh solutions. Using a detector, the pipeline first 
+locates the person/pose region-of-interest (ROI) within the frame. The tracker subsequently 
+predicts the pose landmarks and segmentation mask within the ROI using the ROI-cropped 
+frame as input. Note that for video use cases the detector is invoked only as needed, i.e., for the 
+very first frame and when the tracker could no longer identify body pose presence in the 
+previous frame. For other frames the pipeline simply derives the ROI from the previous frame’s 
+pose landmarks.\\
+The pipeline is implemented as a MediaPipe graph that uses a pose landmark subgraph from 
+the pose landmark module and renders using a dedicated pose renderer subgraph. The pose 
+landmark subgraph internally uses a pose detection subgraph from the pose detection module.\\
+Pose Estimation Quality\\
+To evaluate the quality of our models against other well-performing publicly available 
+solutions, we use three different validation datasets, representing different verticals: Yoga, 
+Dance and HIIT. Each image contains only a single person located 2-4 meters from the camera. 
+To be consistent with other solutions, we perform evaluation only for 17 Key Points from 
+COCO topology.\\
+Pose Classification\\
+One of the applications Blaze Pose can enable is fitness. More specifically - pose classification 
+and repetition counting. In this section we’ll provide basic guidance on building a custom pose 
+classifier with the help of Colabs and wrap it in a simple fitness demo within ML Kit quick
+start app. Push-ups and squats are used for demonstration purposes as the most common 
+exercises.\\
+We picked the k-nearest neighbours algorithm (k-NN) as the classifier. It’s simple and easy to 
+start with. The algorithm determines the object’s class based on the closest samples in the 
+training set.
+
+
+\subsection{OpenCV}
+OpenCV is the huge open-source library for the computer vision, machine learning, and image processing and now it plays a major role in real-time operation which is very important in today’s systems. By using it, one can process images and videos to identify objects, faces, or even handwriting of a human.
+
+\subsection{Pandas and Matplotlib}
+Pandas is a package commonly used to deal with data analysis. It simplifies the loading of data from external sources such as text files and databases, as well as providing ways of analysing and manipulating data once it is loaded into your computer.\\ The features provided in pandas automate and simplify a lot of the common tasks that would take many lines of code to write in the basic Python langauge.\\\\
+Matplotlib is a Python package used for data plotting and visualisation. It is a useful complement to Pandas, and like Pandas, is a very feature-rich library which can produce a large variety of plots, charts, maps, and other visualisations.
+
+\subsection{Python}
+Python is dynamically-typed and garbage-collected. It supports multiple programming 
+paradigms, including structured (particularly, procedural), object-oriented and functional 
+programming. It is often described as a "batteries included" language due to its comprehensive 
+standard library.
+
+\subsection{Numpy}
+NumPy or sometimes called numerical python is a library for the Python programming language, adding 
+support for large, multi-dimensional arrays and matrices, along with a large collection of highlevel mathematical functions to operate on these arrays. The ancestor of NumPy, Numeric, was 
+originally created by Jim Hugunin with contributions from several other developers. In 2005, 
+Travis Oliphant created NumPy by incorporating features of the competing Numarray into 
+Numeric, with extensive modifications. NumPy is open-source software and has many 
+contributors. NumPy is a NumFOCUS fiscally sponsored project.
+
+\chapter{IMPLEMENTATION AND TESTING}
+\linespread{1.5}
+\section{Input and Output}
+Input is taken from user via a external web camera which then will be processed properly in order to get proper output.\\
+Output is generated in the form of a CSV file and the data is visualized on a plot.
+\subsection{Input Design}
+Input can be taken from external camera on.(NOTE:User needs to change the camera setting in code if using external camera)\\
+\subsection{Output Design}
+Output is shown on the cv2 image show screen and also stored in a CSV File which is present in our code.\\
+A Graph of the said data is also generated for us and and visualized.
+\section{Testing}
+System testing of the software and hardware is a testing conducted on a system 
+which is complete, integrated system that works as a whole. System testing is a 
+critical testing procedure that must be conducted by software developer before 
+the system released. During system testing it can evaluate the system’s 
+compliance with its specified requirements according to the system design. 
+Furthermore, several testing activities in system testing test not only the design 
+of the system, but also the behaviour and the believed expectations result from 
+the customer. In addition, various complex test cases that used to test the system 
+are according to the business process requirements which are collected from the 
+user. Meanwhile, errors or bugs that detected during the testing is required 
+software developer look into it from the initial step of the business process to the 
+end of the process to ensure it have expected result in order to solve the errors or 
+bugs to determine the degree of system stability
+\section{Types of Testing}
+\subsection{Unit testing}
+First of all, unit testing will be the first testing method that used to test the 
+developed system. It consists of testing activities that test the system module by 
+module which has not been integrated as a whole. By doing unit testing, developer 
+is able to identify error and bug easily since it is finding the error and bug through 
+a unit part of the system rather than finding error through the complete system. In 
+addition, developer will test the unit part of the system with the validation and the 
+correctness of data value. Valid and invalid input will be entering to test and 
+ensure the system processes perform with an expected result.
+%\subsubsection{Input}
+
+\begin{lstlisting}
+\end{lstlisting}
+%\subsubsection{Test result}
+\subsection{Integration testing}
+It tests for the errors resulting from integration of modules. One specification of 
+integration testing is whether parameters match on both sides of type, permissible 
+ranges and meaning. Integration testing is functional black box test method. It 
+includes testing each module as an impenetrable mechanism for information. The 
+only concern during integration testing is that the modules work together properly
+%\subsubsection{Input}
+\begin{lstlisting}
+\end{lstlisting}
+%\subsubsection{Test result}
+\subsection{Acceptance Testing}
+Last but not lease, acceptance testing also known as user acceptance testing would 
+be the final testing procedure that perform to test the developed software system. 
+In acceptance testing, the testing activities are different compare to the testing 
+activities that mentioned previously because the tester that tests the system will 
+be the final user which do not have knowledge about the system logic. If the final 
+user encountered an error while using the system, system developer are required 
+to maintain the system as soon as possible and release a new patch for the existing 
+system to recover the error. Meanwhile, final user will use the system that 
+visualized as to support their real business routine operation; therefore, software 
+support team are required to stand by to provide technical support while final user 
+need any help or support that regarding the system.
+
+%\subsubsection{Input}
+\begin{lstlisting}
+\end{lstlisting}
+%\subsubsection{Test Result}
+\newpage
+%\subsection{Test Result}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 18cm, width=17cm]{test1.PNG}
+ \caption{\textbf{Test Image}}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 18cm, width=17cm]{Test2.PNG}
+ \caption{\textbf{Test Image}}
+\end{figure}
+\chapter{RESULTS AND DISCUSSIONS}
+\linespread{1.5}
+\section{Efficiency of the Proposed System}
+The Proposed system uses very less computation resource and is free of cost when it comes to its implementation. so it is very efficient moreover it can be improved in performance via giving stronger confidence interval for the recognition.
+%\section{Comparison of Existing and Proposed System}
+
+\section{Sample Code}
+\begin{lstlisting}
+import cv2
+import mediapipe as mp
+import numpy as np
+import pandas as pd
+import time
+import matplotlib.pyplot as plt
+mp_drawing = mp.solutions.drawing_utils
+mp_pose = mp.solutions.pose
+# VIDEO FEED
+cap = cv2.VideoCapture(0)
+while cap.isOpened():
+    ret, frame = cap.read()
+    cv2.imshow('Mediapipe Feed', frame)
+    
+    if cv2.waitKey(10) & 0xFF == ord('q'):
+        break
+        
+cap.release()
+cv2.destroyAllWindows()
+cap = cv2.VideoCapture(1)
+## Setup mediapipe instance
+with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+    while cap.isOpened():
+        ret, frame = cap.read()
+        
+        # Recolor image to RGB
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image.flags.writeable = False
+      
+        # Make detection
+        results = pose.process(image)
+    
+        # Recolor back to BGR
+        image.flags.writeable = True
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        
+        # Render detections
+        mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
+                                mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), 
+                                mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
+                                 )               
+        
+        cv2.imshow('Mediapipe Feed', image)
+
+        if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+    for lndmrk in mp_pose.PoseLandmark:
+    print(lndmrk)
+landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].visibility
+landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value]
+landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value]
+def calculate_angle(a,b,c):
+    a = np.array(a) # First
+    b = np.array(b) # Mid
+    c = np.array(c) # End
+    
+    radians = np.arctan2(c[1]-b[1], c[0]-b[0]) - np.arctan2(a[1]-b[1], a[0]-b[0])
+    angle = np.abs(radians*180.0/np.pi)
+    
+    if angle >180.0:
+        angle = 360-angle
+        
+    return angle 
+shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
+elbow = [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x,landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y]
+wrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
+shoulder, elbow, wrist
+calculate_angle(shoulder, elbow, wrist)
+tuple(np.multiply(elbow, [640, 480]).astype(int))
+cap = cv2.VideoCapture(0)
+## Setup mediapipe instance
+with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+    while cap.isOpened():
+        ret, frame = cap.read()
+        
+        # Recolor image to RGB
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image.flags.writeable = False
+      
+        # Make detection
+        results = pose.process(image)
+    
+        # Recolor back to BGR
+        image.flags.writeable = True
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        
+        # Extract landmarks
+        try:
+            landmarks = results.pose_landmarks.landmark
+            
+            # Get coordinates
+            shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
+            elbow = [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x,landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y]
+            wrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
+            
+            # Calculate angle
+            angle = calculate_angle(shoulder, elbow, wrist)
+            
+            # Visualize angle
+            cv2.putText(image, str(angle), 
+                           tuple(np.multiply(elbow, [640, 480]).astype(int)), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                                )
+                       
+        except:
+            pass
+        
+        
+        # Render detections
+        mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
+                                mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), 
+                                mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
+                                 )               
+        
+        cv2.imshow('Mediapipe Feed', image)
+
+        if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+
+    cap.release()
+    cv2.destroyAllWindows()
+cap = cv2.VideoCapture(0)
+
+# Curl counter variables
+counter = 0
+stage = None
+df=pd.DataFrame()
+last_time=time.time()
+list1 = []
+list2 = []
+## Setup mediapipe instance
+with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
+    while cap.isOpened():
+        ret, frame = cap.read()
+        
+        # Recolor image to RGB
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        image.flags.writeable = False
+      
+        # Make detection
+        results = pose.process(image)
+    
+        # Recolor back to BGR
+        image.flags.writeable = True
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+        
+        # Extract landmarks
+        try:
+            landmarks = results.pose_landmarks.landmark
+            
+            # Get coordinates
+            shoulder = [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x,landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y]
+            elbow = [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x,landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y]
+            wrist = [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x,landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y]
+            
+            # Calculate angle
+            angle = calculate_angle(shoulder, elbow, wrist)
+            
+            # Visualize angle
+            cv2.putText(image, str(angle), 
+                           tuple(np.multiply(elbow, [640, 480]).astype(int)), 
+                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2, cv2.LINE_AA
+                                )
+            
+            # Curl counter logic
+            if angle > 160:
+                stage = "down"
+            if angle < 30 and stage =='down':
+                stage="up"
+                counter +=1
+                print(counter)
+                end_time=time.time()-last_time
+                print(end_time)
+                list1.append(counter)
+                list2.append(end_time)
+                last_time=time.time()
+                       
+        except:
+            pass
+        
+        # Render curl counter
+        # Setup status box
+        cv2.rectangle(image, (0,0), (225,73), (245,117,16), -1)
+        
+        # Rep data
+        cv2.putText(image, 'REPS', (15,12), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+        cv2.putText(image, str(counter), 
+                    (10,60), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255), 2, cv2.LINE_AA)
+        
+        # Stage data
+        cv2.putText(image, 'STAGE', (65,12), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+        cv2.putText(image, stage, 
+                    (60,60), 
+                    cv2.FONT_HERSHEY_SIMPLEX, 2, (255,255,255), 2, cv2.LINE_AA)
+        
+        
+        # Render detections
+        mp_drawing.draw_landmarks(image, results.pose_landmarks, mp_pose.POSE_CONNECTIONS,
+                                mp_drawing.DrawingSpec(color=(245,117,66), thickness=2, circle_radius=2), 
+                                mp_drawing.DrawingSpec(color=(245,66,230), thickness=2, circle_radius=2) 
+                                 )               
+        
+        cv2.imshow('Mediapipe Feed', image)
+
+        if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
+    df2 = pd.DataFrame({'Counter':list1,'Time':list2})
+    df = df.append(df2,ignore_index=True)
+    df.to_csv('file1.csv')
+    cap.release()
+    cv2.destroyAllWindows()
+plt.plot(list1,list2,'b*-')
+plt.xlabel('Push-Ups')
+plt.ylabel('Time-Taken')
+plt.title('Count VS time Graph')
+plt.show()
+\end{lstlisting}
+\subsubsection{Output}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 15cm, width=17cm]{input.PNG}
+ \caption{\textbf{Output 1}}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 18cm, width=17cm]{mediapipe.PNG}
+ \caption{\textbf{Output 2}}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 15cm, width=17cm]{0down.PNG}
+ \caption{\textbf{Output 3}}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 15cm, width=17cm]{1up.PNG}
+ \caption{\textbf{Output 4}}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 15cm, width=17cm]{graph.PNG}
+ \caption{\textbf{Output 5}}
+\end{figure}
+\begin{figure}[H]
+ \centering
+ \includegraphics[height= 15cm, width=17cm]{angle.PNG}
+ \caption{\textbf{Output 6}}
+\end{figure}
+\chapter{CONCLUSION AND FUTURE ENHANCEMENTS}
+\linespread{1.5}
+\section{Conclusion}
+The project entitled “Workout Helper” is a project which is proposed to be 
+implementing to replace the manual system. Our system will help users to keep a 
+counter of their workout schedule and help them manage their workout results.
+We use computer vision to implement our functionality in which we get all joints 
+in our body and use angle in between joints to get count of our exercise report.
+We use libraries like media pipe and OpenCV to make our application for our 
+use.
+\section{Future Enhancements}
+This project involves functions with respect to most widely computer vision 
+library .\\
+Which in turn will make our computer act as a helper for users and help them 
+maintain better posture while they workout. \\
+How to improve the project in short span of time.\\
+*Allow customers to customize food orders and reservation system.\\
+*Allow to save payments and online transaction in a database.\\
+*Allow to process order as a guest.\\
+*Allow to find and choose a nearby restaurant.\\
+*Integrate within store touch screen device like iPad.\\
+\chapter{PLAGIARISM REPORT}
+\chapter{SOURCE CODE \& POSTER PRESENTATION}
+\section{Source Code}
+
+\section{Poster Presentation}
+\addcontentsline{toc}{chapter}{References}
+\renewcommand\bibname{References}
+➢Y. Zhang, K. Li, K. Li, L. Wang, “Image super-resolution using very deep residualchannel attention networks, in: Proceedings of the European Conference onComputer Vision”, ECCV, vol.80, pp. 286–301,2018.\\
+
+I. Laradji, P. Rodriguez, O. Manas, K. Lensink, “A weakly supervised consistency-based learning method for covid-19 segmentation in ct images, in: Proceedings ofthe IEEE/CVF Winter Conference on Applications of Computer Vision, WACV,vol.94, pp. 2453–2462,2021 .
+
+
+\begin{thebibliography}{9}
+\bibitem{latexcompanion} \text{Wang, A., Chen, G., Yang, J., Zhao, S., & Chang, C. Y. (2016). A
+comparative study on human activity recognition using inertial sensors in a smartphone. IEEE Sensors
+Journal, 16(11), 4566-4578.}\\\\ \textbf{FORMAT:Author(s)name (Year).Title, Journal name, Volume,
+Issue, Pageno.}\\
+\bibitem{latexcompanion} \text{J. Long, E. Shelhamer, T. Darrell, “Fully convolutional networks for semanticsegmentation, in: Proceedings of the IEEE Conference on Computer Vision andPattern Recognition”, CVPR, vol.122, pp. 3431–3440, 2015}\\
+\bibitem{latexcompanion} \text{R. Birla, A.P.S. Chauhan,”An efficient method for quality analysis of rice using machine vision system” J. Adv. Informat. Technol.,vol. 6 (3) , pp. 140-145,2015}\\
+\bibitem{latexcompanion} \text{K.R. Singh, S. Chaudhury, “Efficient technique for rice grain classification using back-propagation neural network and wavelet decomposition IET Comput.” Vision, vol.10, pp. 780-787 ,2016. 
+}\\
+\bibitem{latexcompanion} \text{K. Sabanci, A. Kayabasi, A. Toktas“Computer vision-based method for classification of wheat grains using artificial neural network” J. Sci. Food Agric, vol.97 (8), pp. 2588-2593,2017.
+}\\
+\end{thebibliography}
+
+\end{document}
